@@ -338,7 +338,7 @@ void main()
 							addKeyword(re_link.match(3), absoluteUrl(fileName, re_link.match(1)));
 					
 					// skip Google ads
-					if(match(line, `^<script `))
+					if(match(line, `^<!-- Google ad -->`))
 						skip = nextSkip = true;
 					if(match(line, `^</script>$`))
 						nextSkip = false;
@@ -348,6 +348,10 @@ void main()
 						skip = nextSkip = true;
 					if(match(line, `^<div id="content">$`))
 						skip = nextSkip = false;
+
+					// skip "digg this"
+					if(match(line, `<script src="http://digg\.com/tools/diggthis\.js"`))
+						skip = true;
 
 					if(!skip)
 						newlines ~= line;
@@ -366,7 +370,7 @@ void main()
 				foreach(line;lines)
 				{
 					// skip #div.content positioning
-					if(!match(line, `margin-left:13em;`))
+					if(!match(line, `margin-left:\s*1[35]em;`))
 						newlines ~= line;
 				}
 				src = join(newlines, newline);
