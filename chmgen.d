@@ -244,8 +244,10 @@ void main()
 					string line = origline;
 					bool nextSkip = skip;
 					
-					if(match(line, `<li><a href="(http://www.digitalmars.com/d)?/?(\d\.\d)?/index.html" title="D Programming Language \d\.\d">D .\.0 (...)|(&rarr;)</a></li>`))
+					if(match(line, `<li><a href="(http://www.digitalmars.com/d)?/?(\d\.\d)?/index.html" title="D Programming Language \d\.\d">`))
 						continue; // don't process link as well
+					
+					line = line.replace("<ul>>", "<ul>");
 
 					if (re_title.test(line))
 					{
