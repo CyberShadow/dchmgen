@@ -1,4 +1,5 @@
 // D HTML to CHM converter/generator, by Vladimir Panteleev <thecybershadow@gmail.com>
+// Written in the D Programming Language, version 1
 
 import std.stdio;
 import std.file;
